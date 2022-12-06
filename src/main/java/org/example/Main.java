@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -40,9 +41,18 @@ public class Main {
             */
 
             //삭제
-            Member findMember = em.find(Member.class, 1L);
-            em.remove(findMember);
+            /*Member findMember = em.find(Member.class, 1L);
+            em.remove(findMember);*/
 
+            //JPQL ( 객체를 대상으로 검색하는 객체 지향 쿼리 )
+            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+                    .setFirstResult(1) //페이지네이션
+                    .setMaxResults(10)
+                    .getResultList();
+
+            for (Member member : result) {
+                System.out.println("member.name = " + member.getName());
+            }
             tx.commit();
         } catch (Exception ex) {
             tx.rollback();
