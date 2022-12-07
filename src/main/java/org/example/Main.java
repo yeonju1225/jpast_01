@@ -89,10 +89,11 @@ public class Main {
             tx.commit();*/
 
             //데이터 변경
+
             Member findMember = em.find(Member.class, 2L);
             findMember.setName("ZZZZZ");
 
-            System.out.println("===========================");
+            /*System.out.println("===========================");*/
             tx.commit();
 
         } catch (Exception ex) {
