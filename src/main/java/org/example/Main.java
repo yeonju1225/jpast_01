@@ -45,15 +45,56 @@ public class Main {
             em.remove(findMember);*/
 
             //JPQL ( 객체를 대상으로 검색하는 객체 지향 쿼리 )
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+            /*List<Member> result = em.createQuery("select m from Member as m", Member.class)
                     .setFirstResult(1) //페이지네이션
                     .setMaxResults(10)
                     .getResultList();
 
             for (Member member : result) {
                 System.out.println("member.name = " + member.getName());
-            }
+            }*/
+
+            /*//비영속
+            Member member = new Member();
+            member.setId(3L);
+            member.setName("임연주");
+
+            //영속
+            // 1차 캐시에 저장
+            em.persist(member);
+
+            // 1차 캐시에 있는 것을 먼저 가져옴
+            Member findMember1 = em.find(Member.class, 3L);*/
+
+            // 첫번째는 디비에서 조회가 되야하고 두번쨰는 1차캐시에서 가져온다.
+            // DB에서 조회해서 1차 캐시에 저장하고 반환
+            /*Member findMember1 = em.find(Member.class, 3L);
+            // 이미 조회해서 1차 캐시에 저장한 값이 있기 때문에 1차 캐시에서 반환
+            Member findMember2 = em.find(Member.class, 3L);
+
+            System.out.println("id : "  + findMember1.getId());
+            System.out.println("name : " + findMember1.getName());
+
+*/
+            /*Member member1 = new Member(150L,"A");
+            Member member2 = new Member(160L, "B");
+
+            // 1차 캐시와 SQL 저장소에 있음.
+            em.persist(member1);
+            em.persist(member2);
+
+            System.out.println("====================");
+
+            //커밋을 해야 실제 DB에 저장됨.
+            tx.commit();*/
+
+            //데이터 변경
+            Member findMember = em.find(Member.class, 2L);
+            findMember.setName("ZZZZZ");
+
+            System.out.println("===========================");
             tx.commit();
+
         } catch (Exception ex) {
             tx.rollback();
         } finally {
