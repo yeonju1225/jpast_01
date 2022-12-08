@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
+@SequenceGenerator(name = "member_seq_generator", sequenceName = "member_seq")
 //이렇게 유니크값을 설정 가능 아래에 Colums에서 주는 것보다 낫다.
 //@Table(uniqueConstraints)
 //테이블 명이 USER라고 되있으면 이렇게.
@@ -155,8 +156,10 @@ public class Member {
     }*/
 
     //기본키 맵핑
+    // IDENTITY
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
     private long id;
 
     @Column(name = "name", nullable = false)

@@ -105,7 +105,7 @@ public class Main {
             em.persist(member);*/
 
             Member member = new Member();
-            member.setId(100L);
+//            member.setId(100L);
             member.setUsername("임연주");
 
             em.persist(member);
