@@ -1,5 +1,5 @@
 package org.example;
 
 public enum RoleType {
-    GUEST,USER,ADMIN
+    GUEST, USER, ADMIN
 }
