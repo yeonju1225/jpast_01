@@ -19,23 +19,23 @@ public class Main {
         tx.begin();
 
         try {
-            /*
             //신규 등록
+            /*
             Member member = new Member();
             member.setId(2L);
             member.setName("전명진");
             em.persist(member);
             */
 
-            /*
             //조회
+            /*
             Member findMember = em.find(Member.class, 1L);
             System.out.println("findMember.id = " + findMember.getId());
             System.out.println("findMember.name = " + findMember.getName());
             */
 
-            /*
             //수정
+            /*
             Member findMember = em.find(Member.class, 1L);
             findMember.setName("김유경");
             */
@@ -54,7 +54,9 @@ public class Main {
                 System.out.println("member.name = " + member.getName());
             }*/
 
-            /*//비영속
+            //영속성 컨텍스트
+            /*
+            //비영속
             Member member = new Member();
             member.setId(3L);
             member.setName("임연주");
@@ -89,11 +91,18 @@ public class Main {
             tx.commit();*/
 
             //데이터 변경
-
-            Member findMember = em.find(Member.class, 2L);
+            /*Member findMember = em.find(Member.class, 2L);
             findMember.setName("ZZZZZ");
 
-            /*System.out.println("===========================");*/
+            System.out.println("===========================");*/
+
+            Member member = new Member();
+            member.setId(300L);
+            member.setUsername("전명진");
+            member.setRoleType(RoleType.USER);
+
+            em.persist(member);
+
             tx.commit();
 
         } catch (Exception ex) {
