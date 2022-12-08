@@ -96,10 +96,17 @@ public class Main {
 
             System.out.println("===========================");*/
 
-            Member member = new Member();
+            // 필드와 컬럼맵핑
+            /*Member member = new Member();
             member.setId(300L);
-            member.setUsername("전명진");
+            member.setUsername("임연주");
             member.setRoleType(RoleType.USER);
+
+            em.persist(member);*/
+
+            Member member = new Member();
+            member.setId(100L);
+            member.setUsername("임연주");
 
             em.persist(member);
 

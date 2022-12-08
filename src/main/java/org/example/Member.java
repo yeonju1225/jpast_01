@@ -45,7 +45,7 @@ public class Member {
     }*/
 
     //필드와 컬럼맵핑
-    @Id
+    /*@Id
     private Long id;
 
     @Column(name = "name", nullable = false, unique = true, columnDefinition = "varchar(100) default 'EMPTY'")
@@ -58,7 +58,7 @@ public class Member {
         예를 들어 ) USER, ADMIN 이라서 USER = 0 , ADMIN = 1 의 순서였는데
         GUEST가 추가되면  GUEST, USER, ADMIN 이 되면서 순서가 0, 1, 2 가 되버린다
         그러면 초기에 저장했던 USER는 0 GUEST가 추가된 후 저장한 GUEST가 0 이 되서 값이 꼬이기 때문에 STRING으로 사용.
-    */
+    /*
     @Enumerated(EnumType.STRING)
     private RoleType roleType; //DB에서 이넘타입을 쓰고 싶다.
 
@@ -152,5 +152,31 @@ public class Member {
 
     public void setTest2(LocalDateTime test2) {
         this.test2 = test2;
+    }*/
+
+    //기본키 맵핑
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "name", nullable = false)
+    private String username;
+
+    public Member() {}
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
     }
 }
