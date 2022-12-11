@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@SequenceGenerator(name = "member_seq_generator", sequenceName = "member_seq")
+//@SequenceGenerator(name = "member_seq_generator", sequenceName = "member_seq")
 //이렇게 유니크값을 설정 가능 아래에 Colums에서 주는 것보다 낫다.
 //@Table(uniqueConstraints)
 //테이블 명이 USER라고 되있으면 이렇게.
@@ -157,7 +157,7 @@ public class Member {
 
     //기본키 맵핑
     // IDENTITY
-    @Id
+    /*@Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
     private long id;
@@ -181,5 +181,86 @@ public class Member {
 
     public long getId() {
         return id;
+    }*/
+    /*@Id @GeneratedValue
+    @Column(name = "MEMBER_ID")
+    private Long id;
+    @Column(name = "USERNAME")
+    private String username;
+    @Column(name = "TEAM_ID")
+    private Long teamId;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }*/
+
+    //단방향
+    @Id @GeneratedValue
+    @Column(name = "MEMBER_ID")
+    private Long id;
+    @Column(name = "USERNAME")
+    private String username;
+    //단방향 맵핑...
+    @ManyToOne //관계
+    //연관관계 주인. 등록, 수정 가능 ( 외래키가 있는 곳으로 주인을 정해야 함 )
+    @JoinColumn(name = "TEAM_ID") //조인할 컬럼
+    private Team team;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    /*public void setTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
+    }*/
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", team=" + team +
+                '}';
     }
 }

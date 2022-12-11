@@ -104,11 +104,54 @@ public class Main {
 
             em.persist(member);*/
 
-            Member member = new Member();
+            /*Member member = new Member();
 //            member.setId(100L);
             member.setUsername("임연주");
 
+            em.persist(member);*/
+
+            //연관관계 맵핑
+            //객체지향스럽지 못함
+            /*Team team = new Team();
+            team.setTeamname("TeamA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeamId(team.getId());
             em.persist(member);
+
+            Member findeMember = em.find(Member.class, member.getId());
+
+            Long findTeamId = findeMember.getTeamId();
+            Team findTeam = em.find(Team.class, findTeamId);*/
+
+            //단방향
+            Team team = new Team();
+            team.setTeamname("TeamA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            //member.setTeam(team);
+            em.persist(member);
+
+            //새로 메서드 만들어서 적용(연관관계 맵핑 메서드)
+            team.addMember(member);
+
+            em.flush();
+            em.clear();
+
+            //Member findeMember = em.find(Member.class, member.getId());
+
+            Team findTeam = em.find(Team.class, team.getId());
+            List<Member> members = findTeam.getMembers();
+            for (Member m : members) {
+                System.out.println("m = " + m.getUsername());
+            }
+
+            /*Team findTeam = findeMember.getTeam();
+            System.out.println("findTeam = " + findTeam.getTeamname());*/
 
             tx.commit();
 
